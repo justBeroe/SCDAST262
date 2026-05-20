@@ -51,3 +51,13 @@ steps:
     script: |
       echo Starting WebInspect API scan...
       curl -X POST "https://localhost:8888/api/v2/scans/start-scan-cicd" -H "accept: text/plain" -H "Authorization: FortifyToken ZDVjMDBhZmUtYTYxMy00ZDAzLTg5NjgtMjlkNmNlZjIyNzY3" -H "Content-Type: application/json" -d "{\"cicdToken\":\"833c5077-251b-43ab-8646-3b9aa13907f9\",\"name\":\"getAPItest6\"}" -k
+      
+      
+      
+- task: FortifyScanCentralDAST@7
+  displayName: 'Start SC DAST 26.2 API CICD scan with PLUGIN'  
+  inputs:
+    scanCentralDastApiUrl: 'https://localhost:8888'
+    scanCentralCiCdToken: '833c5077-251b-43ab-8646-3b9aa13907f9'
+    sscCiToken: 'ZDVjMDBhZmUtYTYxMy00ZDAzLTg5NjgtMjlkNmNlZjIyNzY3'
+
