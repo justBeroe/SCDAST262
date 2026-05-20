@@ -6,14 +6,48 @@
 trigger:
 - main
 
+variables:
+  System.Debug: true
+
+
 pool:
-  vmImage: ubuntu-latest
+ name: Default
+#  demands:
+#    - Agent.Name -equals UP636306
+ 
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+# - script: echo Hello, BEROE world!
+#   displayName: 'Run a one-line BEROE script'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+
+# - script: |
+#     echo ScanCentral version check.
+#     call scancentral -version
+#     whoami
+#     echo WI scan.
+#     wi.exe -u http://zero.webappsecurity.com/ -c -ps 4 -w test -f test.pdf -gp -ag
+#   displayName: 'Run BEROE scancentral version check & WI scan'
+
+# - script: |
+#     echo SCA & rules version check.
+#     sourceanalyzer -version
+#     fortifyupdate -showInstalledRules
+#   displayName: 'Run BEROE sourceanalyzer and rulepack version check'
+
+# - task: FortifyScanCentralSAST@7
+#   inputs:
+#     scanCentralClientToken: '$(ScanCentral.ClientToken)'
+    # sscCiToken: '$(ScanCentral.SscCiToken)'
+    # buildTool: 'none'
+
+
+# ----------------------------
+# Step 1: Start WebInspect API scan
+# ----------------------------
+- task: CmdLine@2
+  displayName: 'Start SC DAST 26.2 API CICD scan'
+  inputs:
+    script: |
+      echo Starting WebInspect API scan...
+      curl -X POST "https://localhost:8888/api/v2/scans/start-scan-cicd" -H "accept: text/plain" -H "Authorization: FortifyToken ZDVjMDBhZmUtYTYxMy00ZDAzLTg5NjgtMjlkNmNlZjIyNzY3" -H "Content-Type: application/json" -d "{\"cicdToken\":\"833c5077-251b-43ab-8646-3b9aa13907f9\",\"name\":\"getAPItest6\"}" -k
