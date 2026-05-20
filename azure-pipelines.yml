@@ -8,12 +8,14 @@ trigger:
 
 variables:
   System.Debug: true
-
+  NODE_TLS_REJECT_UNAUTHORIZED: '0'
 
 pool:
  name: Default
 #  demands:
 #    - Agent.Name -equals UP636306
+
+  
  
 
 steps:
