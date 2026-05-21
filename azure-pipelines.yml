@@ -63,3 +63,10 @@ steps:
     scanCentralCiCdToken: '833c5077-251b-43ab-8646-3b9aa13907f9'
     sscCiToken: 'ZDVjMDBhZmUtYTYxMy00ZDAzLTg5NjgtMjlkNmNlZjIyNzY3'
 
+- task: CmdLine@2
+  displayName: 'Start SC DAST 26.2 FCLI scan'
+  inputs:
+    script: |
+      echo Starting FCLI DAST scan...
+      fcli sc-dast scan start -n=SAMOBEROE -s=84c94cfe-af01-467d-be7b-21e3570dd189
+
